@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block content %}
+   <ul class="list-unstyled" type="circle">
+  <li class="media">
+
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">APIs used  by Polygon</h5>
+      Obtaining accurate, reliable, real-time financial market data is incredibly difficult. Getting that data into a consistent and easy to use format is even more so.
+       At Polygon.io we've set out to handle the heavy lifting for developers so they can spend less time worrying about data and more time creating applications.
+    </div>
+
+  <li class="media my-4">
+
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">What is ticker and why?</h5>
+     A ticker symbol is a short code used to identify a company that issues stocks or securities. These identification codes were designed by the exchanges and kept short to help investors and traders easily identify them.
+    </div>
+  </li>
+  <li class="media">
+
+    <div class="media-body">
+      <h5 class="mt-0 mb-1">List of Ticker symbols of various stocks</h5>
+     <ul class="list-group">
+  <li class="list-group-item">List with their symbol sample</li>
+
+
+  <li class="list-group-item list-group-item-primary">CC of clemson cement</li>
+  <li class="list-group-item list-group-item-secondary">AA For Alcoa Corporation</li>
+        <li class="list-group-item list-group-item-success">BB for BlackBerry</li>
+  <li class="list-group-item list-group-item-danger">AApl for Apple Inc.</li>
+  <li class="list-group-item list-group-item-warning">GG for google</li>
+
+</ul>
+    </div>
+  </li>
+</ul>
+
+{% if ticker %}
+   <div align="center">
+      <h1> {{ticker}}</h1>
+   </div>
+{% endif %}
+
+{% if api1 %}
+   {% if api == "Error..." %}
+      There was a problem with your ticker symbol, please try again...
+   {% else %}
+
+      <div align="center">
+         <h1> Stock Name : {{api2.name}}</h1>
+         <br/>
+      </div>
+
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 18px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Information</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Todays Open </td>
+    <td>{{api1.open}}</td>
+  </tr>
+  <tr>
+    <td>Todays High</td>
+    <td>{{api1.high}}</td>
+  </tr>
+  <tr>
+    <td>Todays Low</td>
+    <td>{{api1.low}}</td>
+  </tr>
+  <tr>
+    <td>Todays Close</td>
+    <td>{{api1.close}}</td>
+  </tr>
+  <tr>
+    <td>Todays Volume</td>
+    <td>{{api1.volume}}</td>
+
+  </tr>
+  <tr>
+    <td>Company Headquarters State</td>
+    <td>{{api2.hq_state}}</td>
+  </tr>
+    <tr>
+    <td>Company Type</td>
+    <td>{{api2.type}}</td>
+  </tr>
+</table>
+
+</body>
+
+
+   {% endif %}
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

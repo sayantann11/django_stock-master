@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+<html lang="en">
+<h1 align="center"> Check Graph For Stock</h1>
+<br>
+
+<form action="{% url 'chartgraph' %}" class="form-inline my-2 my-lg-0" method="POST" >
+      {% csrf_token %}
+
+    <label for="entert">Enter Ticker For Stock :</label>
+    <input type="text" id="entert" name="entert" >
+
+    <label for="from">From Date:</label>
+    <input type="date" id="from" name="from"
+       value="2020-07-15"
+       min="2019-06-01" max="2021-04-31">
+    <label for="to">  To Date:</label>
+    <input type="date" id="to" name="to"
+       value="2020-07-21"
+       min="2019-06-01" max="2021-04-31">
+         <button type ="submit" id="search"  > Upload </button>
+        </form>
+<br>
+
+
+
+
+
+
+    <div align="center">
+   <h1> Stock Name : {{api2.name}}</h1>
+   <br/>
+
+</div>
+<head>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable({{values|safe}}, true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+  }
+    </script>
+
+  </head>
+  <body>
+    <div align="left" id="chart_div" style="width: 1200px; height: 750px; "></div>
+  </body>
+<div align="center">
+<h2><b>X-AXIS RESEMBLES THE TIME/DATE</b></h2>
+<h2><b>Y-AXIS RESEMBLES THE PRICE($)</b></h2>
+</div>>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 18px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+<table>
+  <tr>
+    <th>Information</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>Todays Open </td>
+    <td>{{api1.open}}</td>
+  </tr>
+  <tr>
+    <td>Todays High</td>
+    <td>{{api1.high}}</td>
+  </tr>
+  <tr>
+    <td>Todays Low</td>
+    <td>{{api1.low}}</td>
+  </tr>
+  <tr>
+    <td>Todays Close</td>
+    <td>{{api1.close}}</td>
+  </tr>
+  <tr>
+    <td>Todays Volume</td>
+    <td>{{api1.volume}}</td>
+
+  </tr>
+  <tr>
+    <td>Company Headquarters State</td>
+    <td>{{api2.hq_state}}</td>
+  </tr>
+    <tr>
+    <td>Company Type</td>
+    <td>{{api2.type}}</td>
+  </tr>
+</table>
+
+</body>
+</html>
+</html>
+
+
+{% endblock %}
